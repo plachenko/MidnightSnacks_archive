@@ -1,0 +1,30 @@
+body {
+  padding: 50px;
+  font: 24px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+#audio_cont{
+  width: 100%;
+}
+.show{
+  background-color: rgba(92, 100, 228, 0.3);
+  border: #CCC 1px solid;
+  margin: 4px 0px;
+  padding: 5px 0px;
+  text-align:center;
+  color: #000;
+  font-size: 2vw;
+  font-weight: bold;
+  cursor: pointer;
+  box-sizing:border-box;
+  }
+  .show:hover{
+    color:#FFF;
+    background-color: rgba(21, 23, 47, 0.74);
+  }
+  .current{
+    border: #F00 5px solid;
+  }

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  div
+    audio#audio_cont(controls)
+      source#song_src(type="audio/mpeg")
+  div#show_cont
+    each val in url
+      div.show= val
