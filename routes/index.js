@@ -6,11 +6,19 @@ const cheerio = require('cheerio');
 
 var url = [];
 function buildURLs(){
+  var show_re = /[^=show\/]([^\/]+)/;
   request('http://midnightsnacks.fm', (err, respond, body)=>{
     var $ = cheerio.load(body);
-    $('.week').map(function(i, el){
-      url.push($(this).find('.dl').attr('href'));
-    });
+  $('.dates').map(function(i, el){
+    var link = $(this).find('a').attr('href');
+    var showNum = show_re.exec(link)[0];
+    if(showNum > 400){
+      url.push('http://midnightsnacks.fm/archive/Midnight_Snacks-'+showNum+'_'+link.substr(-8)+'.mp3');
+    }else{
+      url.push('http://midnightsnacks.fm/archive/Midnight_Snacks-'+link.substr(-8)+'.mp3');
+    }
+  });
+
   });
 }
 
@@ -20,7 +28,7 @@ router.get('/', function(req, res, next) {
   setTimeout(function(){
     res.render('index', { title: 'Express', url: url.reverse() });
     url = [];
-  }, 1000);
+  }, 2000);
 });
 
 module.exports = router;
