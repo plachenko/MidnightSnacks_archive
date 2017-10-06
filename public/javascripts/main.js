@@ -24,7 +24,8 @@ $(document).ready(function(){
 
    function playAudio(_num){
 
-      var url = $('#show_cont').children()[_num].innerHTML;
+      var url_el = $('#show_cont').children()[_num];
+      var url = $(url_el).data('url');
 
       $('#song_src').attr('src', url);
 

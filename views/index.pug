@@ -1,9 +1,9 @@
 extends layout
 
 block content
-  div
+  div#audio_over
     audio#audio_cont(controls)
       source#song_src(type="audio/mpeg")
   div#show_cont
     each val in url
-      div.show= val
+      div(data-url=val[0]).show= "Show "+val[1]+" - "+val[2]

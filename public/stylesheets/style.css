@@ -28,3 +28,10 @@ a {
   .current{
     border: #F00 5px solid;
   }
+
+  #audio_over{
+    position: fixed;
+    width:100%;
+    left:0px;
+    top:0px;
+  }
