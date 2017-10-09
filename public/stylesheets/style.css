@@ -13,8 +13,7 @@ a {
   background-color: rgba(92, 100, 228, 0.3);
   border: #CCC 1px solid;
   margin: 4px 0px;
-  padding: 5px 0px;
-  text-align:center;
+  padding: 5px 40px;
   color: #000;
   font-size: 2vw;
   font-weight: bold;
@@ -35,3 +34,14 @@ a {
     left:0px;
     top:0px;
   }
+  .ms_lnk{
+    z-index:9999;
+    display:block;
+    float:left;
+    text-decoration:none;
+  }
+
+.showDate{
+  text-align: right;
+  display: block;
+}

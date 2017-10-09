@@ -6,4 +6,6 @@ block content
       source#song_src(type="audio/mpeg")
   div#show_cont
     each val in url
-      div(data-url=val[0]).show= "Show "+val[1]+" - "+val[2]
+      div(data-url=val[0]).show
+        a(target="_blank" href="http://midnightsnacks.fm/show/"+val[1]+"/"+val[2]).ms_lnk="Show " + val[1]
+        span.showDate= val[2]

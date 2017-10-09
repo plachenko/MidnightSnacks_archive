@@ -5,7 +5,7 @@ const request = require('request');
 const cheerio = require('cheerio');
 
 var url = [];
-function buildURLs(){
+function buildURLs(callback){
   var show_re = /[^=show\/]([^\/]+)/;
   request('http://midnightsnacks.fm', (err, respond, body)=>{
 
@@ -20,26 +20,25 @@ function buildURLs(){
         //After the 400th show switch naming convention to Midnight_Snacks-[showNumber]_[date].mp3
         if(showNum > 400){
           urlVal.push('http://midnightsnacks.fm/archive/Midnight_Snacks-'+showNum+'_'+link.substr(-8)+'.mp3');
-
         }else{
           urlVal.push('http://midnightsnacks.fm/archive/Midnight_Snacks-'+link.substr(-8)+'.mp3');
         }
+        urlVal.push(showNum);
+        urlVal.push(link.substr(-8));
+        url.push(urlVal);
       }
-      urlVal.push(showNum);
-      urlVal.push(link.substr(-8));
-      url.push(urlVal);
     });
-
+    callback();
   });
 }
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  buildURLs();
-  setTimeout(function(){
+  function buildpage(){
     res.render('index', { title: 'Express', url: url.reverse() });
-    url = [];
-  }, 2000);
+  }
+  buildURLs(buildpage);
+  url = [];
 });
 
 module.exports = router;

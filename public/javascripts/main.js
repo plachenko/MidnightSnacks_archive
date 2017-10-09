@@ -3,7 +3,7 @@ $(document).ready(function(){
    var num = 0;
 
    $('.show').on('click', function(e){
-      e.preventDefault();
+      //e.preventDefault();
 
       num = $(this).index();
 
