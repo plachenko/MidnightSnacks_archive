@@ -21,10 +21,11 @@ $(document).ready(function(){
             $div.append($span);
 
             $div.on('click', function(e){
-                num = $(this);
+                el = $(this);
+               console.log(el);
 
-                setCurrent(num);
-                playAudio(num);
+                setCurrent(el);
+                playAudio(el);
             });
 
             html.append($div);
@@ -53,17 +54,24 @@ $(document).ready(function(){
       aud.play();
    }
 
-   /*
+
    aud.onended = function(){
-      var _el;
-      if($('.current').data('num')< f.length-1){
-         _el = $('.current').next();
+
+      var nextShow;
+      if(($('.current').index()+1)%15 !== 0){
+         nextShow = $('.current').next('.show');
       }else{
-         _el = "";
+         console.log($('.current').data('num'));
+         if($('.current').data('num') == 11){
+            $("#show_cont").pagination('go',1);
+         }else{
+            $("#show_cont").pagination('next');
+         }
+         nextShow = $('.show').eq(0);
       }
 
-      setCurrent($(_el));
-      playAudio($(_el));
+      setCurrent(nextShow);
+      playAudio(nextShow);
+
    };
-   */
 });
