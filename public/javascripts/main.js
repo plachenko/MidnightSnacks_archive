@@ -1,31 +1,51 @@
 $(document).ready(function(){
    var aud = $('#audio_cont')[0];
    var num = 0;
+   var current;
 
-   $('.show').on('click', function(e){
-      //e.preventDefault();
+   $("#show_cont").pagination({
+      dataSource: f,
+      pageSize: 15,
+      pageRange: 10,
+      callback: function(data, pagination){
+         var html =$("<div>");
+         data.forEach(function(i, ind){
+            var $div = $('<div>', {"data-num":i[1],"data-url": i[0], "class":'show'});
+            var $span = $('<span>', {"class":'showDate'}).html(i[2]);
+            var $a = $('<a>',{"class":"ms_lnk","target":"_blank","href":"http://midnightsnacks.fm/show/"+i[1]+"/"+i[2]}).html("Show "+ + i[1]);
+            if(i[1]==current){
+               $div.addClass('current');
+            }
 
-      num = $(this).index();
+            $div.append($a);
+            $div.append($span);
 
-      setCurrent(num);
-      playAudio(num);
+            $div.on('click', function(e){
+                num = $(this);
 
+                setCurrent(num);
+                playAudio(num);
+            });
+
+            html.append($div);
+
+         });
+         $('#show_cont_list').html(html);
+      }
    });
 
-   function setCurrent(_num){
+   function setCurrent(_el){
+      current = _el.data('num');
       var cur = $('#show_cont').find('.current');
-          cur.toggleClass('current');
+      if(cur){
+         cur.toggleClass('current');
+      }
 
-      var el = $('#show_cont').children()[_num];
-
-      $(el).toggleClass('current');
-
+      _el.toggleClass('current');
    }
 
-   function playAudio(_num){
-
-      var url_el = $('#show_cont').children()[_num];
-      var url = $(url_el).data('url');
+   function playAudio(_el){
+      var url = _el.data('url');
 
       $('#song_src').attr('src', url);
 
@@ -33,13 +53,17 @@ $(document).ready(function(){
       aud.play();
    }
 
+   /*
    aud.onended = function(){
-      if(num < $('#show_cont').children().length-1){
-         num++;
+      var _el;
+      if($('.current').data('num')< f.length-1){
+         _el = $('.current').next();
       }else{
-         num = 0;
+         _el = "";
       }
-      setCurrent(num);
-      playAudio(num);
+
+      setCurrent($(_el));
+      playAudio($(_el));
    };
+   */
 });
