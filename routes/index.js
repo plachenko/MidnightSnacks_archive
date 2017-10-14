@@ -35,7 +35,7 @@ function buildURLs(callback){
 /* GET home page. */
 router.get('/', function(req, res, next) {
   function buildpage(){
-    res.render('index', { title: 'Express', url: url.reverse() });
+    res.render('index', { title: 'Midnight Snacks Player', url: url.reverse() });
   }
   buildURLs(buildpage);
   url = [];
